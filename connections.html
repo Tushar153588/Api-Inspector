@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI API Inspector — Connection Diagnostics & TLS Probes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <input type="checkbox" id="theme-toggle" style="display:none;" aria-hidden="true">
+
+  <div class="app-container">
+
+    <!-- ====================================================================
+         LEFT NAVIGATION SIDEBAR
+         ==================================================================== -->
+    <aside class="sidebar" aria-label="Primary Navigation">
+      <div>
+        <div class="sidebar-masthead">
+          <div class="brand-meta">
+            <span class="pulse-dot"></span>
+            <span>SYSTEM // INSPECT-CORE</span>
+          </div>
+          <h1 class="brand-title">AI API Inspector</h1>
+          <div class="brand-edition">EDITION 2026.1 · SPEC REV 4</div>
+        </div>
+
+        <div class="sidebar-scope">
+          <span class="scope-label">TARGET CLUSTER</span>
+          <span class="scope-value">us-east-prod-04</span>
+        </div>
+
+        <nav class="sidebar-nav-container">
+          <div class="nav-section-title">Workspaces</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">01</span>
+                  <span>Inspector</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="models.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">02</span>
+                  <span>Model Registry</span>
+                </div>
+                <span class="nav-badge">24</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="compare.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">03</span>
+                  <span>Model Comparator</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="connections.html" class="nav-link active">
+                <div class="nav-link-left">
+                  <span class="nav-index">04</span>
+                  <span>Connection Diagnostics</span>
+                </div>
+                <span class="nav-badge">4/4 OK</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="benchmarks.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">05</span>
+                  <span>Evals & Benchmarks</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+
+          <div class="nav-section-title" style="margin-top: 12px;">Diagnostic Channels</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#probes" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>Live Probe Matrix</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#pool-status" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>TCP Connection Pool</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div>
+        <div class="provider-matrix">
+          <div class="matrix-header">
+            <span class="matrix-title">Gateway Health</span>
+            <span class="matrix-spec">PROBE 30s</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>anthropic-api</span>
+            </div>
+            <span class="provider-latency">142ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>openai-direct</span>
+            </div>
+            <span class="provider-latency">188ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>google-vertex</span>
+            </div>
+            <span class="provider-latency">124ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot idle"></span>
+              <span>local-ollama</span>
+            </div>
+            <span class="provider-latency">STANDBY</span>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="theme-toggle-row">
+            <span>ARCHIVAL NEWSPRINT</span>
+            <label class="toggle-switch" for="theme-toggle" title="Toggle Archival Print / Studio Graphite">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         CENTRAL EDITORIAL WORKSPACE (Connection Testing)
+         ==================================================================== -->
+    <main class="workspace" id="main-content">
+      <header class="editorial-topbar">
+        <div class="breadcrumbs">
+          <span>NETWORK</span>
+          <span class="sep">/</span>
+          <span class="current">GATEWAY CONNECTION DIAGNOSTICS</span>
+        </div>
+        <div class="topbar-meta">
+          <div class="meta-item">
+            <span>SOCKET HEALTH</span>
+            <span class="val" style="color:var(--status-ok);">ALL SYSTEMS GREEN</span>
+          </div>
+          <div class="meta-item">
+            <span>DNS RESOLVER</span>
+            <span class="val">1.1.1.1 (Cloudflare DoH)</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="editorial-body">
+        
+        <article class="editorial-masthead-article">
+          <div class="session-kicker">
+            <span>LOW-LEVEL NETWORK PROTOCOL DIAGNOSTICS</span>
+            <span class="kicker-divider"></span>
+            <span>ACTIVE TRACER FEED</span>
+          </div>
+          <h2 class="editorial-headline">Provider Gateway Probing & TLS Handshake Latency</h2>
+          <p class="editorial-deck">
+            Continuous health probing across upstream inference endpoints. Monitoring DNS propagation, certificate validity, HTTP/2 multiplexing, keep-alive connection re-use, and token authentication validity.
+          </p>
+
+          <div class="article-marginalia">
+            <div class="marginalia-item">ACTIVE GATEWAYS: <strong>4 Verified</strong></div>
+            <div class="marginalia-item">AVERAGE HANDSHAKE: <strong>16.2ms</strong></div>
+            <div class="marginalia-item">HTTP MULTIPLEXING: <strong>ALPN h2 Enabled</strong></div>
+          </div>
+        </article>
+
+        <!-- Gateway Diagnostic Probes (Pure Thin Hairlines, Zero Clutter) -->
+        <section id="probes">
+          <div class="section-masthead">
+            <div class="section-label">
+              <span class="section-num">04.1</span>
+              <span>Upstream Endpoints Diagnostic Ledger</span>
+            </div>
+            <div class="section-actions">
+              <span class="field-hint">UPDATED EVERY 30s</span>
+            </div>
+          </div>
+
+          <div class="table-editorial-container">
+            <table class="data-table-editorial" aria-label="Connection Probes">
+              <thead>
+                <tr>
+                  <th>GATEWAY / HOST</th>
+                  <th>RESOLVED IP</th>
+                  <th>DNS</th>
+                  <th>TLS 1.3</th>
+                  <th>ALPN</th>
+                  <th>CIPHER SUITE</th>
+                  <th>AUTH VALIDITY</th>
+                  <th style="text-align:right;">RTT PING</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="model-id">api.anthropic.com</span>
+                    <div style="font-size:10px; color:var(--text-muted);">Cloudflare Anycast Egress</div>
+                  </td>
+                  <td>104.18.2.148</td>
+                  <td>3.4ms</td>
+                  <td>14.1ms</td>
+                  <td>h2</td>
+                  <td>TLS_AES_128_GCM_SHA256</td>
+                  <td style="color:var(--status-ok);">Valid (sk-ant-•••)</td>
+                  <td style="text-align:right; font-weight:600; color:var(--status-ok);">18.2ms</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="model-id">api.openai.com</span>
+                    <div style="font-size:10px; color:var(--text-muted);">Cloudflare / Fastly CDN</div>
+                  </td>
+                  <td>104.18.6.192</td>
+                  <td>4.1ms</td>
+                  <td>17.8ms</td>
+                  <td>h2</td>
+                  <td>TLS_AES_256_GCM_SHA384</td>
+                  <td style="color:var(--status-ok);">Valid (sk-proj-•••)</td>
+                  <td style="text-align:right; font-weight:600; color:var(--status-ok);">22.5ms</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="model-id">us-central1-aiplatform.googleapis.com</span>
+                    <div style="font-size:10px; color:var(--text-muted);">Google Front-End (GFE)</div>
+                  </td>
+                  <td>142.250.190.42</td>
+                  <td>2.8ms</td>
+                  <td>12.4ms</td>
+                  <td>h2</td>
+                  <td>CHACHA20_POLY1305_SHA256</td>
+                  <td style="color:var(--status-ok);">OAuth2 ServiceAcct</td>
+                  <td style="text-align:right; font-weight:600; color:var(--status-ok);">15.1ms</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="model-id">api.groq.com</span>
+                    <div style="font-size:10px; color:var(--text-muted);">Fastly Edge Infrastructure</div>
+                  </td>
+                  <td>151.101.65.140</td>
+                  <td>5.2ms</td>
+                  <td>19.6ms</td>
+                  <td>h2</td>
+                  <td>TLS_AES_128_GCM_SHA256</td>
+                  <td style="color:var(--status-ok);">Valid (gsk_•••)</td>
+                  <td style="text-align:right; font-weight:600; color:var(--status-ok);">24.8ms</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- TCP Pool & Diagnostic Console -->
+        <div class="editorial-grid asym-65-35" style="margin-top: 48px;" id="pool-status">
+          
+          <div class="editorial-col">
+            <section>
+              <div class="section-masthead">
+                <div class="section-label">
+                  <span class="section-num">04.2</span>
+                  <span>HTTP Client Keep-Alive Socket Pool</span>
+                </div>
+              </div>
+
+              <table class="spec-table" aria-label="Socket Pool">
+                <thead>
+                  <tr>
+                    <th>TARGET HOST</th>
+                    <th>ACTIVE</th>
+                    <th>IDLE IN POOL</th>
+                    <th>REUSE RATIO</th>
+                    <th style="text-align:right;">MAX AGE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="param-name">api.anthropic.com:443</td>
+                    <td>2 sockets</td>
+                    <td>8 idle</td>
+                    <td>94.2% reused</td>
+                    <td class="param-val">120s</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">api.openai.com:443</td>
+                    <td>1 socket</td>
+                    <td>6 idle</td>
+                    <td>91.8% reused</td>
+                    <td class="param-val">120s</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">us-central1-aiplatform:443</td>
+                    <td>4 sockets</td>
+                    <td>12 idle</td>
+                    <td>98.5% reused</td>
+                    <td class="param-val">300s</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+
+          <div class="editorial-col editorial-col-divider">
+            <section>
+              <div class="section-masthead">
+                <div class="section-label">
+                  <span class="section-num">04.3</span>
+                  <span>TLS Certificate Expiration</span>
+                </div>
+              </div>
+
+              <div class="key-value-list" style="margin-top: 10px;">
+                <div class="kv-row inline">
+                  <span class="kv-key">*.anthropic.com</span>
+                  <span class="kv-val">Expires in 64 days (DigiCert)</span>
+                </div>
+                <div class="kv-row inline">
+                  <span class="kv-key">*.openai.com</span>
+                  <span class="kv-val">Expires in 82 days (Cloudflare)</span>
+                </div>
+                <div class="kv-row inline">
+                  <span class="kv-key">*.googleapis.com</span>
+                  <span class="kv-val">Expires in 45 days (Google Trust)</span>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ====================================================================
+         RIGHT DEVELOPER COMMAND CENTRE
+         ==================================================================== -->
+    <aside class="command-centre" aria-label="Developer Command Center">
+      <div class="command-header">
+        <span class="command-title">Diagnostic Probe Controls</span>
+        <span class="command-shortcut">⌘P</span>
+      </div>
+
+      <div class="command-actions-section">
+        <button type="button" class="btn-execute">
+          <span>PROBE ALL ENDPOINTS</span>
+          <span class="key-hint">⌘ + ↵</span>
+        </button>
+        <button type="button" class="btn-secondary">
+          <span>RE-VALIDATE CREDENTIALS</span>
+          <span class="key-hint">⇧⌘V</span>
+        </button>
+        <button type="button" class="btn-secondary">
+          <span>FLUSH DNS CACHE</span>
+          <span class="key-hint">⌥F</span>
+        </button>
+      </div>
+
+      <div class="command-block">
+        <div class="block-label">Credential Vault Status</div>
+        <div class="key-value-list">
+          <div class="kv-row inline">
+            <span class="kv-key">ANTHROPIC_KEY</span>
+            <span class="kv-val" style="color:var(--status-ok);">Loaded (Env)</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">OPENAI_KEY</span>
+            <span class="kv-val" style="color:var(--status-ok);">Loaded (Env)</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">GOOGLE_CREDS</span>
+            <span class="kv-val" style="color:var(--status-ok);">Service Account</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">OLLAMA_HOST</span>
+            <span class="kv-val">localhost:11434</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="command-block" style="flex:1;">
+        <div class="block-label">Network Diagnostic Log</div>
+        <div class="curl-box" style="font-size:10px; max-height:260px;">16:30:02 [DNS] Resolving api.anthropic.com -&gt; 104.18.2.148 (3.4ms)
+16:30:02 [TCP] Connected to 104.18.2.148:443 (11.2ms)
+16:30:02 [TLS] Handshake complete: TLS_AES_128_GCM_SHA256 (14.1ms)
+16:30:02 [ALPN] Negotiated protocol: h2
+16:30:03 [AUTH] Token pre-flight check HTTP 200 OK
+16:30:15 [PING] Keep-alive socket probe ping: 18.2ms RTT</div>
+      </div>
+    </aside>
+
+  </div>
+</body>
+</html>

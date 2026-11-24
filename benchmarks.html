@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI API Inspector — Benchmark Evaluation Suite</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <input type="checkbox" id="theme-toggle" style="display:none;" aria-hidden="true">
+
+  <div class="app-container">
+
+    <!-- ====================================================================
+         LEFT NAVIGATION SIDEBAR
+         ==================================================================== -->
+    <aside class="sidebar" aria-label="Primary Navigation">
+      <div>
+        <div class="sidebar-masthead">
+          <div class="brand-meta">
+            <span class="pulse-dot"></span>
+            <span>SYSTEM // INSPECT-CORE</span>
+          </div>
+          <h1 class="brand-title">AI API Inspector</h1>
+          <div class="brand-edition">EDITION 2026.1 · SPEC REV 4</div>
+        </div>
+
+        <div class="sidebar-scope">
+          <span class="scope-label">TARGET CLUSTER</span>
+          <span class="scope-value">us-east-prod-04</span>
+        </div>
+
+        <nav class="sidebar-nav-container">
+          <div class="nav-section-title">Workspaces</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">01</span>
+                  <span>Inspector</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="models.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">02</span>
+                  <span>Model Registry</span>
+                </div>
+                <span class="nav-badge">24</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="compare.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">03</span>
+                  <span>Model Comparator</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="connections.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">04</span>
+                  <span>Connection Diagnostics</span>
+                </div>
+                <span class="nav-badge">4/4 OK</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="benchmarks.html" class="nav-link active">
+                <div class="nav-link-left">
+                  <span class="nav-index">05</span>
+                  <span>Evals & Benchmarks</span>
+                </div>
+                <span class="nav-badge">INDEX</span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="nav-section-title" style="margin-top: 12px;">Evaluation Suites</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#mmlu" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>Reasoning (MMLU-Pro)</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#humaneval" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>Coding (HumanEval)</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#niah" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>Long Context (NIAH)</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div>
+        <div class="provider-matrix">
+          <div class="matrix-header">
+            <span class="matrix-title">Gateway Health</span>
+            <span class="matrix-spec">PROBE 30s</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>anthropic-api</span>
+            </div>
+            <span class="provider-latency">142ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>openai-direct</span>
+            </div>
+            <span class="provider-latency">188ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>google-vertex</span>
+            </div>
+            <span class="provider-latency">124ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot idle"></span>
+              <span>local-ollama</span>
+            </div>
+            <span class="provider-latency">STANDBY</span>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="theme-toggle-row">
+            <span>ARCHIVAL NEWSPRINT</span>
+            <label class="toggle-switch" for="theme-toggle" title="Toggle Archival Print / Studio Graphite">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         CENTRAL EDITORIAL WORKSPACE (Benchmarks)
+         ==================================================================== -->
+    <main class="workspace" id="main-content">
+      <header class="editorial-topbar">
+        <div class="breadcrumbs">
+          <span>EVALS</span>
+          <span class="sep">/</span>
+          <span class="current">FRONTIER BENCHMARK EVALUATIONS</span>
+        </div>
+        <div class="topbar-meta">
+          <div class="meta-item">
+            <span>TEST SUITE</span>
+            <span class="val">STANDARD-CORE-2026</span>
+          </div>
+          <div class="meta-item">
+            <span>SAMPLE COUNT</span>
+            <span class="val">1,240 QUESTIONS</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="editorial-body">
+        
+        <article class="editorial-masthead-article">
+          <div class="session-kicker">
+            <span>EMPIRICAL FRONTIER MODEL EVALUATIONS</span>
+            <span class="kicker-divider"></span>
+            <span>SPECIFICATION AUDIT</span>
+          </div>
+          <h2 class="editorial-headline">Reasoning, Coding & Long-Context Retrieval Benchmarks</h2>
+          <p class="editorial-deck">
+            Rigorous cross-evaluation under standardized prompts with temperature clamped at 0.0. Measuring real pass@1 accuracy across reasoning benchmarks, complex software engineering tasks, and long-context needle retrieval.
+          </p>
+
+          <div class="article-marginalia">
+            <div class="marginalia-item">EVAL RUN: <strong>#BENCH-992-FINAL</strong></div>
+            <div class="marginalia-item">METRICS: <strong>Pass@1 (Zero-Shot)</strong></div>
+            <div class="marginalia-item">COST EFFICIENCY: <strong>Calculated per 100 queries</strong></div>
+          </div>
+        </article>
+
+        <!-- Benchmark Matrix Table (Editorial Typography, Hairlines) -->
+        <section id="mmlu">
+          <div class="section-masthead">
+            <div class="section-label">
+              <span class="section-num">05.1</span>
+              <span>Empirical Benchmark Leaderboard</span>
+            </div>
+            <div class="section-actions">
+              <span class="field-hint">STRICT PASS@1 SCORING</span>
+            </div>
+          </div>
+
+          <div class="table-editorial-container">
+            <table class="data-table-editorial" aria-label="Benchmark Scores">
+              <thead>
+                <tr>
+                  <th>MODEL IDENTIFIER</th>
+                  <th>MMLU-PRO</th>
+                  <th>HUMANEVAL (PYTHON)</th>
+                  <th>SWE-BENCH LITE</th>
+                  <th>MATH-500</th>
+                  <th>NIAH (128K)</th>
+                  <th style="text-align:right;">EVAL COST / 1K</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="model-id">claude-3-5-sonnet-20241022</span>
+                    <div style="font-size:10px; color:var(--text-muted);">Anthropic PBC</div>
+                  </td>
+                  <td style="font-weight:600; color:var(--text-primary);">78.0%</td>
+                  <td style="font-weight:600; color:var(--status-ok);">93.7%</td>
+                  <td style="font-weight:600; color:var(--status-ok);">49.0%</td>
+                  <td>78.3%</td>
+                  <td style="color:var(--status-ok);">100%</td>
+                  <td style="text-align:right; font-weight:500;">$4.20</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="model-id">gpt-4o-2024-08-06</span>
+                    <div style="font-size:10px; color:var(--text-muted);">OpenAI</div>
+                  </td>
+                  <td>72.6%</td>
+                  <td>90.2%</td>
+                  <td>33.2%</td>
+                  <td>76.6%</td>
+                  <td style="color:var(--status-ok);">99.8%</td>
+                  <td style="text-align:right; font-weight:500;">$3.45</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="model-id">o1-preview-2024-09-12</span>
+                    <div style="font-size:10px; color:var(--text-muted);">OpenAI Reasoning</div>
+                  </td>
+                  <td style="font-weight:600; color:var(--status-ok);">85.2%</td>
+                  <td>92.4%</td>
+                  <td style="font-weight:600; color:var(--status-ok);">53.3%</td>
+                  <td style="font-weight:600; color:var(--status-ok);">96.4%</td>
+                  <td style="color:var(--status-ok);">100%</td>
+                  <td style="text-align:right; font-weight:500; color:var(--accent-text);">$24.80</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="model-id">gemini-1.5-pro-002</span>
+                    <div style="font-size:10px; color:var(--text-muted);">Google DeepMind</div>
+                  </td>
+                  <td>74.2%</td>
+                  <td>86.5%</td>
+                  <td>32.0%</td>
+                  <td>74.8%</td>
+                  <td style="color:var(--status-ok);">100% (2M)</td>
+                  <td style="text-align:right; font-weight:500;">$1.85</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="model-id">meta-llama/llama-3.3-70b-instruct</span>
+                    <div style="font-size:10px; color:var(--text-muted);">Meta AI / Open Weights</div>
+                  </td>
+                  <td>70.1%</td>
+                  <td>88.4%</td>
+                  <td>27.3%</td>
+                  <td>73.0%</td>
+                  <td style="color:var(--status-warn);">97.2%</td>
+                  <td style="text-align:right; font-weight:500; color:var(--status-ok);">$0.85</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Long-Context Needle In A Haystack (NIAH) Retrieval Spec -->
+        <div class="editorial-grid asym-65-35" style="margin-top: 48px;" id="niah">
+          
+          <div class="editorial-col">
+            <section>
+              <div class="section-masthead">
+                <div class="section-label">
+                  <span class="section-num">05.2</span>
+                  <span>Needle-in-a-Haystack Depth Retrieval Fidelity (128k Context)</span>
+                </div>
+              </div>
+
+              <table class="spec-table" aria-label="Retrieval Depth Matrix">
+                <thead>
+                  <tr>
+                    <th>DOCUMENT DEPTH</th>
+                    <th>CLAUDE 3.5 SONNET</th>
+                    <th>GPT-4O</th>
+                    <th style="text-align:right;">GEMINI 1.5 PRO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="param-name">0% (Top of Context)</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td class="param-val" style="color:var(--status-ok);">100% Pass</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">25% Depth</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td class="param-val" style="color:var(--status-ok);">100% Pass</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">50% Depth (Middle / Lost in Middle)</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td style="color:var(--status-ok);">99.4% Pass</td>
+                    <td class="param-val" style="color:var(--status-ok);">100% Pass</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">75% Depth</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td class="param-val" style="color:var(--status-ok);">100% Pass</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">100% (End of Context)</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td style="color:var(--status-ok);">100% Pass</td>
+                    <td class="param-val" style="color:var(--status-ok);">100% Pass</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+
+          <div class="editorial-col editorial-col-divider">
+            <section>
+              <div class="section-masthead">
+                <div class="section-label">
+                  <span class="section-num">05.3</span>
+                  <span>Accuracy per Dollar Ratio</span>
+                </div>
+              </div>
+
+              <div class="waterfall-card" style="border:none; padding-top:0;">
+                <p style="font-size:12px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+                  Calculated as (MMLU-Pro Score / Price per 1M blended tokens). Higher values indicate superior economic efficiency for production inference.
+                </p>
+                <div class="waterfall-bars">
+                  <div class="waterfall-stage">
+                    <span class="stage-label">Llama 3.3 70B</span>
+                    <div class="stage-bar-track">
+                      <div class="stage-bar-fill ttft" style="left:0; width:95%;"></div>
+                    </div>
+                    <span class="stage-duration">101.5</span>
+                  </div>
+                  <div class="waterfall-stage">
+                    <span class="stage-label">Gemini 1.5 Pro</span>
+                    <div class="stage-bar-track">
+                      <div class="stage-bar-fill dns" style="left:0; width:52%;"></div>
+                    </div>
+                    <span class="stage-duration">23.7</span>
+                  </div>
+                  <div class="waterfall-stage">
+                    <span class="stage-label">Claude 3.5 Sonnet</span>
+                    <div class="stage-bar-track">
+                      <div class="stage-bar-fill" style="left:0; width:22%;"></div>
+                    </div>
+                    <span class="stage-duration">8.7</span>
+                  </div>
+                  <div class="waterfall-stage">
+                    <span class="stage-label">o1-preview</span>
+                    <div class="stage-bar-track">
+                      <div class="stage-bar-fill" style="left:0; width:8%;"></div>
+                    </div>
+                    <span class="stage-duration">2.3</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ====================================================================
+         RIGHT DEVELOPER COMMAND CENTRE
+         ==================================================================== -->
+    <aside class="command-centre" aria-label="Developer Command Center">
+      <div class="command-header">
+        <span class="command-title">Benchmark Runner</span>
+        <span class="command-shortcut">⌘B</span>
+      </div>
+
+      <div class="command-actions-section">
+        <button type="button" class="btn-execute">
+          <span>RUN SELECTED SUITE</span>
+          <span class="key-hint">⌘ + ↵</span>
+        </button>
+        <button type="button" class="btn-secondary">
+          <span>CUSTOM JSONL EVAL</span>
+          <span class="key-hint">⇧⌘L</span>
+        </button>
+        <button type="button" class="btn-secondary">
+          <span>EXPORT CSV REPORT</span>
+          <span class="key-hint">⌥E</span>
+        </button>
+      </div>
+
+      <div class="command-block">
+        <div class="block-label">Dataset Parameters</div>
+        <div class="key-value-list">
+          <div class="kv-row inline">
+            <span class="kv-key">DATASET</span>
+            <span class="kv-val">HumanEval-v2.jsonl</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">TOTAL SAMPLES</span>
+            <span class="kv-val">164 functions</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">CONCURRENCY</span>
+            <span class="kv-val">8 workers</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">SAMPLING TEMP</span>
+            <span class="kv-val">0.0 (greedy)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="command-block" style="flex:1;">
+        <div class="block-label">Recent Eval Ledger</div>
+        <ul class="ledger-list">
+          <li class="ledger-item">
+            <div class="ledger-top">
+              <span class="ledger-id">#EVAL-992</span>
+              <span class="ledger-status ok">COMPLETED</span>
+            </div>
+            <div class="ledger-bottom">
+              <span>SWE-bench Lite (300 tasks)</span>
+              <span>49.0% Pass@1</span>
+            </div>
+          </li>
+          <li class="ledger-item">
+            <div class="ledger-top">
+              <span class="ledger-id">#EVAL-991</span>
+              <span class="ledger-status ok">COMPLETED</span>
+            </div>
+            <div class="ledger-bottom">
+              <span>HumanEval (164 tasks)</span>
+              <span>93.7% Pass@1</span>
+            </div>
+          </li>
+          <li class="ledger-item">
+            <div class="ledger-top">
+              <span class="ledger-id">#EVAL-990</span>
+              <span class="ledger-status ok">COMPLETED</span>
+            </div>
+            <div class="ledger-bottom">
+              <span>MATH-500 Reasoning</span>
+              <span>78.3% Pass@1</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</body>
+</html>

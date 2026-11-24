@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI API Inspector — Side-by-Side Model Comparison</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <input type="checkbox" id="theme-toggle" style="display:none;" aria-hidden="true">
+
+  <div class="app-container">
+
+    <!-- ====================================================================
+         LEFT NAVIGATION SIDEBAR
+         ==================================================================== -->
+    <aside class="sidebar" aria-label="Primary Navigation">
+      <div>
+        <div class="sidebar-masthead">
+          <div class="brand-meta">
+            <span class="pulse-dot"></span>
+            <span>SYSTEM // INSPECT-CORE</span>
+          </div>
+          <h1 class="brand-title">AI API Inspector</h1>
+          <div class="brand-edition">EDITION 2026.1 · SPEC REV 4</div>
+        </div>
+
+        <div class="sidebar-scope">
+          <span class="scope-label">TARGET CLUSTER</span>
+          <span class="scope-value">us-east-prod-04</span>
+        </div>
+
+        <nav class="sidebar-nav-container">
+          <div class="nav-section-title">Workspaces</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">01</span>
+                  <span>Inspector</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="models.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">02</span>
+                  <span>Model Registry</span>
+                </div>
+                <span class="nav-badge">24</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="compare.html" class="nav-link active">
+                <div class="nav-link-left">
+                  <span class="nav-index">03</span>
+                  <span>Model Comparator</span>
+                </div>
+                <span class="nav-badge">DUAL</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="connections.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">04</span>
+                  <span>Connection Diagnostics</span>
+                </div>
+                <span class="nav-badge">4/4 OK</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="benchmarks.html" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">05</span>
+                  <span>Evals & Benchmarks</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+
+          <div class="nav-section-title" style="margin-top: 12px;">Comparator Sets</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#" class="nav-link active">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>Sonnet vs GPT-4o</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>Gemini vs Llama 3.3</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <div class="nav-link-left">
+                  <span class="nav-index">§</span>
+                  <span>o1 vs Claude Reasoning</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div>
+        <div class="provider-matrix">
+          <div class="matrix-header">
+            <span class="matrix-title">Gateway Health</span>
+            <span class="matrix-spec">PROBE 30s</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>anthropic-api</span>
+            </div>
+            <span class="provider-latency">142ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>openai-direct</span>
+            </div>
+            <span class="provider-latency">188ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot active"></span>
+              <span>google-vertex</span>
+            </div>
+            <span class="provider-latency">124ms</span>
+          </div>
+          <div class="provider-row">
+            <div class="provider-name-group">
+              <span class="status-dot idle"></span>
+              <span>local-ollama</span>
+            </div>
+            <span class="provider-latency">STANDBY</span>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="theme-toggle-row">
+            <span>ARCHIVAL NEWSPRINT</span>
+            <label class="toggle-switch" for="theme-toggle" title="Toggle Archival Print / Studio Graphite">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         CENTRAL EDITORIAL WORKSPACE (Comparator)
+         ==================================================================== -->
+    <main class="workspace" id="main-content">
+      <header class="editorial-topbar">
+        <div class="breadcrumbs">
+          <span>EXPERIMENTS</span>
+          <span class="sep">/</span>
+          <span>DIFFERENTIAL EVALS</span>
+          <span class="sep">/</span>
+          <span class="current">EVAL RUN #COMP-309</span>
+        </div>
+        <div class="topbar-meta">
+          <div class="meta-item">
+            <span>SEED</span>
+            <span class="val">#4991024</span>
+          </div>
+          <div class="meta-item">
+            <span>PROMPT HASH</span>
+            <span class="val">sha256:7b49...e28a</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="editorial-body">
+        
+        <article class="editorial-masthead-article">
+          <div class="session-kicker">
+            <span>SYNCHRONOUS COMPARATIVE INSPECTION</span>
+            <span class="kicker-divider"></span>
+            <span>DUAL INFERENCE RUN</span>
+          </div>
+          <h2 class="editorial-headline">Claude 3.5 Sonnet vs. GPT-4o Differential Analysis</h2>
+          <p class="editorial-deck">
+            Evaluating time-to-first-token (TTFT), streaming cadence, code synthesis veracity, and token economic divergence under an identical zero-shot system directive.
+          </p>
+
+          <div class="article-marginalia">
+            <div class="marginalia-item">BENCHMARK PROMPT: <strong>Concurrent Async Queue Implementation (Rust)</strong></div>
+            <div class="marginalia-item">TEMPERATURE: <strong>0.00 (Strict Deterministic)</strong></div>
+            <div class="marginalia-item">STATUS: <strong>Dual 200 OK Complete</strong></div>
+          </div>
+        </article>
+
+        <!-- Side-by-Side Comparison Grid (Restrained, Thin Haired Columns) -->
+        <div class="comparison-board">
+          
+          <!-- Column A: Claude 3.5 Sonnet -->
+          <div class="comparison-col">
+            <div class="comparison-col-header">
+              <div class="comparison-col-title">MODEL A: claude-3-5-sonnet-20241022</div>
+              <div class="comparison-col-meta">
+                <span>ANTHROPIC GATEWAY</span>
+                <span>·</span>
+                <span>HTTP/2 STREAM</span>
+              </div>
+            </div>
+
+            <div class="comparison-telemetry-strip">
+              <div>
+                <div class="t-label">TTFT</div>
+                <div class="t-val" style="color:var(--status-ok);">142.8ms</div>
+              </div>
+              <div>
+                <div class="t-label">THROUGHPUT</div>
+                <div class="t-val">78.4 tok/s</div>
+              </div>
+              <div>
+                <div class="t-label">SESSION COST</div>
+                <div class="t-val">$0.00412</div>
+              </div>
+            </div>
+
+            <div class="comparison-body">use std::sync::Arc;
+use tokio::sync::{mpsc, Mutex};
+
+pub struct AsyncJobQueue&lt;T&gt; {
+    sender: mpsc::Sender&lt;T&gt;,
+    receiver: Arc&lt;Mutex&lt;mpsc::Receiver&lt;T&gt;&gt;&gt;,
+}
+
+impl&lt;T: Send + 'static&gt; AsyncJobQueue&lt;T&gt; {
+    pub fn new(bound: usize) -&gt; Self {
+        let (tx, rx) = mpsc::channel(bound);
+        Self {
+            sender: tx,
+            receiver: Arc::new(Mutex::new(rx)),
+        }
+    }
+
+    pub async fn push(&amp;self, job: T) -&gt; Result&lt;(), mpsc::error::SendError&lt;T&gt;&gt; {
+        self.sender.send(job).await
+    }
+}</div>
+          </div>
+
+          <!-- Column B: GPT-4o -->
+          <div class="comparison-col">
+            <div class="comparison-col-header">
+              <div class="comparison-col-title">MODEL B: gpt-4o-2024-08-06</div>
+              <div class="comparison-col-meta">
+                <span>OPENAI DIRECT</span>
+                <span>·</span>
+                <span>HTTP/2 STREAM</span>
+              </div>
+            </div>
+
+            <div class="comparison-telemetry-strip">
+              <div>
+                <div class="t-label">TTFT</div>
+                <div class="t-val">188.4ms</div>
+              </div>
+              <div>
+                <div class="t-label">THROUGHPUT</div>
+                <div class="t-val">64.1 tok/s</div>
+              </div>
+              <div>
+                <div class="t-label">SESSION COST</div>
+                <div class="t-val">$0.00318</div>
+              </div>
+            </div>
+
+            <div class="comparison-body">use tokio::sync::mpsc;
+
+pub struct TaskQueue&lt;T&gt; {
+    tx: mpsc::Sender&lt;T&gt;,
+    rx: mpsc::Receiver&lt;T&gt;,
+}
+
+impl&lt;T&gt; TaskQueue&lt;T&gt; {
+    pub fn with_capacity(capacity: usize) -&gt; Self {
+        let (tx, rx) = mpsc::channel(capacity);
+        Self { tx, rx }
+    }
+
+    pub async fn enqueue(&amp;self, task: T) -&gt; Result&lt;(), mpsc::error::SendError&lt;T&gt;&gt; {
+        self.tx.send(task).await
+    }
+}</div>
+          </div>
+
+        </div>
+
+        <!-- Differential Telemetry Spec Table -->
+        <section style="margin-top: 48px;">
+          <div class="section-masthead">
+            <div class="section-label">
+              <span class="section-num">03.2</span>
+              <span>Comparative Metrics Ledger</span>
+            </div>
+            <div class="section-actions">
+              <span class="field-hint">DELTA BREAKDOWN</span>
+            </div>
+          </div>
+
+          <table class="spec-table" aria-label="Comparative Metrics">
+            <thead>
+              <tr>
+                <th>BENCHMARK METRIC</th>
+                <th>CLAUDE 3.5 SONNET</th>
+                <th>GPT-4O</th>
+                <th style="text-align:right;">DELTA / WINNER</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="param-name">Time to First Token (TTFT)</td>
+                <td>142.8ms</td>
+                <td>188.4ms</td>
+                <td class="param-val" style="color:var(--status-ok);">-45.6ms (Claude +24%)</td>
+              </tr>
+              <tr>
+                <td class="param-name">Peak Token Throughput</td>
+                <td>78.4 tok/s</td>
+                <td>64.1 tok/s</td>
+                <td class="param-val" style="color:var(--status-ok);">+14.3 tok/s (Claude +22%)</td>
+              </tr>
+              <tr>
+                <td class="param-name">Completion Token Count</td>
+                <td>248 tokens</td>
+                <td>210 tokens</td>
+                <td class="param-val">+38 tokens (Claude)</td>
+              </tr>
+              <tr>
+                <td class="param-name">Input + Output Cost</td>
+                <td>$0.00412</td>
+                <td>$0.00318</td>
+                <td class="param-val" style="color:var(--accent-text);">-$0.00094 (GPT-4o -23%)</td>
+              </tr>
+              <tr>
+                <td class="param-name">Code Compilability (cargo check)</td>
+                <td>100% Valid (Thread-safe Arc)</td>
+                <td>Warning: Receiver requires &amp;mut</td>
+                <td class="param-val" style="color:var(--status-ok);">Claude (Architectural soundness)</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ====================================================================
+         RIGHT DEVELOPER COMMAND CENTRE
+         ==================================================================== -->
+    <aside class="command-centre" aria-label="Developer Command Center">
+      <div class="command-header">
+        <span class="command-title">Comparator Controls</span>
+        <span class="command-shortcut">⌘⇧R</span>
+      </div>
+
+      <div class="command-actions-section">
+        <button type="button" class="btn-execute">
+          <span>RE-RUN COMPARISON</span>
+          <span class="key-hint">⌘ + ↵</span>
+        </button>
+        <button type="button" class="btn-secondary">
+          <span>EXPORT DIFF AS HAR</span>
+          <span class="key-hint">⌘E</span>
+        </button>
+      </div>
+
+      <div class="command-block">
+        <div class="block-label">Evaluation Summary</div>
+        <div class="key-value-list">
+          <div class="kv-row inline">
+            <span class="kv-key">SPEED WINNER</span>
+            <span class="kv-val" style="color:var(--status-ok);">Claude 3.5 Sonnet (142ms)</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">COST WINNER</span>
+            <span class="kv-val">GPT-4o ($0.00318)</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">CORRECTNESS</span>
+            <span class="kv-val" style="color:var(--status-ok);">Claude (Arc&lt;Mutex&gt; concurrency)</span>
+          </div>
+          <div class="kv-row inline">
+            <span class="kv-key">DETERMINISM</span>
+            <span class="kv-val">1.00 (Zero temperature)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="command-block" style="flex:1;">
+        <div class="block-label">Historical Comparisons</div>
+        <ul class="ledger-list">
+          <li class="ledger-item">
+            <div class="ledger-top">
+              <span class="ledger-id">#COMP-308</span>
+              <span class="ledger-status ok">MATCH</span>
+            </div>
+            <div class="ledger-bottom">
+              <span>SQL Query Plan Generation</span>
+              <span>Claude vs Gemini</span>
+            </div>
+          </li>
+          <li class="ledger-item">
+            <div class="ledger-top">
+              <span class="ledger-id">#COMP-307</span>
+              <span class="ledger-status ok">MATCH</span>
+            </div>
+            <div class="ledger-bottom">
+              <span>OpenAPI Specification Draft</span>
+              <span>GPT-4o vs Llama 3.3</span>
+            </div>
+          </li>
+          <li class="ledger-item">
+            <div class="ledger-top">
+              <span class="ledger-id">#COMP-306</span>
+              <span class="ledger-status err">DIFF ERR</span>
+            </div>
+            <div class="ledger-bottom">
+              <span>Regex Parser Edge Cases</span>
+              <span>Mistral vs Claude</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</body>
+</html>
